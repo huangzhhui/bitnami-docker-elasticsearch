@@ -83,7 +83,7 @@ $ docker run \
 or by making a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-mariadb:
+elasticsearch:
   ...
   volumes:
     - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data

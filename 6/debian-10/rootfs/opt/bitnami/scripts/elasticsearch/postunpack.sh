@@ -9,7 +9,10 @@
 # Load Elasticsearch environment variables
 eval "$(elasticsearch_env)"
 
-for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LOG_DIR" "${ELASTICSEARCH_BASE_DIR}/plugins" "${ELASTICSEARCH_BASE_DIR}/modules" "$ELASTICSEARCH_CONF_DIR" "$ELASTICSEARCH_VOLUME_DIR" "$ELASTICSEARCH_INITSCRIPTS_DIR" "$ELASTICSEARCH_MOUNTED_PLUGINS_DIR"; do
+# Allow some of below env vars to be empty, skip if so
+set +o nounset
+for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_REPO_DIR" "$ELASTICSEARCH_LOG_DIR" "${ELASTICSEARCH_BASE_DIR}/plugins" "${ELASTICSEARCH_BASE_DIR}/modules" "$ELASTICSEARCH_CONF_DIR" "$ELASTICSEARCH_VOLUME_DIR" "$ELASTICSEARCH_INITSCRIPTS_DIR" "$ELASTICSEARCH_MOUNTED_PLUGINS_DIR"; do
+    test -z "$dir" && continue
     ensure_dir_exists "$dir"
     chmod -R ug+rwX "$dir"
     # `elasticsearch-plugin install` command complains about being unable to create the a plugin's directory

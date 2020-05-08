@@ -439,6 +439,7 @@ elasticsearch_initialize() {
         touch "$ELASTICSEARCH_CONF_FILE"
         elasticsearch_conf_set http.port "$ELASTICSEARCH_PORT_NUMBER"
         elasticsearch_conf_set path.data "$ELASTICSEARCH_DATA_DIR"
+        test -n "$ELASTICSEARCH_REPO_DIR" && elasticsearch_conf_set path.repo "$ELASTICSEARCH_REPO_DIR"
         elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_type
