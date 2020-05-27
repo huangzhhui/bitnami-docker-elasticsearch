@@ -517,7 +517,7 @@ elasticsearch_install_plugins() {
     done
 
     # Mark plugins as mandatory
-    elasticsearch_conf_set plugin.mandatory "$mandatory_plugins"
+    # elasticsearch_conf_set plugin.mandatory "$mandatory_plugins"
 }
 
 ########################
